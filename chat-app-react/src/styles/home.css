@@ -1,0 +1,96 @@
+.Home {
+    font-family: Arial, Helvetica, sans-serif;
+    height: inherit;
+}
+
+.message-field {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    min-height: fit-content;
+}
+
+.message-field > form {
+    display: flex;
+    width: inherit;
+    -webkit-box-shadow: 0px 33px 28px 22px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 33px 28px 22px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 33px 28px 22px rgba(0, 0, 0, 0.75);
+}
+
+form > textarea {
+    border: none;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    resize: none;
+    width: 100%;
+    font-size: 1.5em;
+    border-bottom: 3px solid aliceblue;
+    border-left: 3px solid aliceblue;
+    border-top: 3px solid aliceblue;
+    border-right: 2px solid aliceblue;
+    line-height: 30px;
+}
+
+form > textarea::placeholder {
+    color: rgb(179, 178, 178);
+}
+
+form > textarea:focus::placeholder {
+    color: white;
+}
+
+form > textarea:valid {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 35px;
+    padding-bottom: 5px;
+}
+
+form > textarea:focus {
+    outline: none;
+    border-bottom: 3px solid aliceblue;
+    border-left: 3px solid aliceblue;
+    border-top: 3px solid aliceblue;
+    border-right: 2px solid aliceblue;
+}
+
+form > button {
+    cursor: pointer;
+    border: 1px solid white;
+    background-color: rgb(155, 251, 184);
+    color: black;
+    width: 100px;
+    border-radius: 5px;
+}
+
+form > button:focus {
+    outline: none;
+}
+
+form > button:active {
+    -webkit-box-shadow: inset 0px 0px 8px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px 0px 8px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px 0px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.chat-field {
+    height: calc(100vh - 107px);
+}
+
+.messages-wrapper {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.message {
+    margin-bottom: 15px;
+    display: flex;
+    padding: 10px;
+    background-color: skyblue;
+    width: fit-content;
+    border-radius: 5px;
+}
