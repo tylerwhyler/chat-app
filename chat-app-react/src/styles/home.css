@@ -7,7 +7,6 @@
     position: fixed;
     bottom: 0px;
     width: 100%;
-    min-height: fit-content;
 }
 
 .message-field > form {
