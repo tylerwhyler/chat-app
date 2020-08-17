@@ -28,7 +28,8 @@ form > textarea {
     border-left: 3px solid aliceblue;
     border-top: 3px solid aliceblue;
     border-right: 2px solid aliceblue;
-    line-height: 30px;
+    line-height: 40px;
+    font-size: 1.9em;
 }
 
 form > textarea::placeholder {
@@ -40,9 +41,10 @@ form > textarea:focus::placeholder {
 }
 
 form > textarea:valid {
+    width: inherit;
     padding-left: 25px;
     padding-right: 25px;
-    padding-top: 35px;
+    padding-top: 40px;
     padding-bottom: 5px;
 }
 
@@ -74,11 +76,14 @@ form > button:active {
 }
 
 .chat-field {
-    height: calc(100vh - 107px);
+    height: 100%;
 }
 
 .messages-wrapper {
+    min-height: calc(100vh - 150px);
+    height: calc(fit-content - 150px);
     margin: 15px;
+    margin-bottom: 135px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -88,8 +93,13 @@ form > button:active {
 .message {
     margin-bottom: 15px;
     display: flex;
+    justify-content: space-around;
     padding: 10px;
     background-color: skyblue;
-    width: fit-content;
-    border-radius: 5px;
+    width: inherit;
+    max-width: 60vw;
+    border-radius: 8px;
+    font-size: 1.7em;
+    word-break: break-all;
+    word-wrap: break-word;
 }

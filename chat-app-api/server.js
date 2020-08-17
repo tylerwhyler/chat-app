@@ -1,14 +1,32 @@
-const http = require("http");
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
-const urlAddress = "127.0.0.1";
-const port = 4000;
+const port = process.env.PORT || 4000;
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "text/html");
-    res.end("<h1>Hello from node</h1>");
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(port, urlAddress, () => {
-    console.log("server running at " + urlAddress + ":" + port + "/");
+io.on('connect', socket => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+
+io.on('connection', socket => {
+    socket.on('chat message', message => {
+        console.log('message: ' + message);
+    });
+});
+
+io.on('connection', socket => {
+    socket.on('chat message', message => {
+        io.emit('chat message', message);
+    });
+});
+
+http.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
