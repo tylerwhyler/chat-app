@@ -1,32 +1,25 @@
 const app = require('express')();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 const port = process.env.PORT || 4000;
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-
-io.on('connect', socket => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-});
+const routes = require('./routes.js');
 
 io.on('connection', socket => {
-    socket.on('chat message', message => {
-        console.log('message: ' + message);
+    socket.on('newMessage', message => {
+        io.emit('message', message);
+        console.log(message);
+
+        // const err = true;
+
+        // if (err) {
+        //     callback({err: 'there was an error'});
+        // }
     });
 });
 
-io.on('connection', socket => {
-    socket.on('chat message', message => {
-        io.emit('chat message', message);
-    });
-});
+app.use(routes);
 
-http.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });

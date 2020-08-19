@@ -1,5 +1,4 @@
 .Home {
-    font-family: Arial, Helvetica, sans-serif;
     height: inherit;
 }
 
@@ -77,18 +76,39 @@ form > button:active {
 
 .chat-field {
     height: 100%;
-}
-
-.messages-wrapper {
-    min-height: calc(100vh - 150px);
     height: calc(fit-content - 150px);
     margin: 15px;
     margin-bottom: 135px;
+}
+
+.messages-wrapper-push {
+    min-height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
 }
+
+.messages-wrapper-pull {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+/* .messages-wrapper:nth-child(even) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+} */
+
+/* .messages-wrapper:nth-child(odd) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+} */
 
 .message {
     margin-bottom: 15px;
@@ -103,3 +123,11 @@ form > button:active {
     word-break: break-all;
     word-wrap: break-word;
 }
+
+/* .message:nth-child(odd) {
+    color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+} */
