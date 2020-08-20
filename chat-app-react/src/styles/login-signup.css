@@ -1,0 +1,37 @@
+.login-signup-wrapper > form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-signup-wrapper > form > input {
+    height: 55px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(216, 207, 207);
+    border-radius: 4px;
+    transition: 0.2s ease-in-out;
+    font-size: 1.4em;
+    margin: 15px;
+}
+
+.login-signup-wrapper > form > input:valid {
+    padding-left: 24px;
+}
+
+.login-signup-wrapper > form > input:focus::placeholder {
+    color: white;
+}
+
+.login-signup-wrapper > form > input:focus {
+    outline: none;
+}
+
+.login-signup-wrapper > form > p {
+    margin-top: -10px;
+    color: rgb(0, 0, 0);
+    font-size: 0.7rem;
+    font-weight: 600;
+}

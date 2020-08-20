@@ -6,10 +6,13 @@ import '../styles/home.css';
 
 let socket;
 
-function Home() {
+function Home({ location }) {
+    let [username, setUsername] = useState('');
+    let [room, setRoom] = useState('');
     let [myMessage, setMyMessage] = useState('');
+    let [myMessages, setMyMessages] = useState([]);
     let [messages, setMessages] = useState([]);
-    let [pullMessages, setPullMessages] = useState([]);
+
     const pageBottom = useRef(null);
     const ENDPOINT = 'localhost:4000';
 
@@ -19,41 +22,56 @@ function Home() {
 
     const submitMyMessage = e => {
         e.preventDefault();
-
-        socket = io(ENDPOINT);
-        socket.emit('newMessage', myMessage);
-
-        setMessages([...messages, myMessage]);
+        if (myMessage) {
+            socket.emit('sendMessage', { username, room, myMessage }, () => {
+                setMyMessage('');
+            });
+            setMessages([...messages, myMessage]);
+        }
     };
 
     const renderMessages = messages.map(message => {
         return <div className='message'>{message}</div>;
     });
-    const renderPullMessages = pullMessages.map(message => {
+
+    const renderMyMessages = myMessages.map(message => {
         return <div className='message'>{message}</div>;
     });
 
     useEffect(() => {
+        const { username, room } = queryString.parse(location.search);
+        setUsername(username);
+        setRoom(room);
+
         socket = io(ENDPOINT);
+        socket.emit('join', { username, room }, () => {});
+
+        return () => {
+            socket.emit('disconnect');
+            socket.off();
+            setUsername(username);
+            setRoom(room);
+        };
+    }, [ENDPOINT, location.search]);
+
+    useEffect(() => {
         socket.on('message', message => {
-            setPullMessages([...pullMessages, message]);
+            setMessages([...messages, message.text]);
         });
-    }, [pullMessages]);
+    }, [messages]);
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages, pullMessages]);
+    }, [messages]);
 
     return (
         <div className='Home'>
-            <div className='chat-field'>
-                <div className='messages-wrapper-push'>{renderMessages}</div>
-                <div className='messages-wrapper-pull'>
-                    {renderPullMessages}
-                </div>
+            <div className='messages-field'>
+                <div className='messages-wrapper'>{renderMessages}</div>
+                <div className='myMessages-wrapper'>{renderMyMessages}</div>
             </div>
 
-            <div className='message-field'>
+            <div className='chat-field'>
                 <form type='submit' onSubmit={submitMyMessage}>
                     <textarea
                         placeholder='Type message'
