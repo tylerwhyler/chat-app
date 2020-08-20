@@ -10,7 +10,6 @@ function Home({ location }) {
     let [username, setUsername] = useState('');
     let [room, setRoom] = useState('');
     let [myMessage, setMyMessage] = useState('');
-    let [myMessages, setMyMessages] = useState([]);
     let [messages, setMessages] = useState([]);
 
     const pageBottom = useRef(null);
@@ -23,19 +22,29 @@ function Home({ location }) {
     const submitMyMessage = e => {
         e.preventDefault();
         if (myMessage) {
+            setMessages([...messages, 'my_message_hackyasf' + myMessage]);
             socket.emit('sendMessage', { username, room, myMessage }, () => {
                 setMyMessage('');
             });
-            setMessages([...messages, myMessage]);
         }
     };
 
     const renderMessages = messages.map(message => {
-        return <div className='message'>{message}</div>;
-    });
-
-    const renderMyMessages = myMessages.map(message => {
-        return <div className='message'>{message}</div>;
+        if (message.includes('my_message_hackyasf')) {
+            return (
+                <div className='myflex-message-wrapper'>
+                    <div className='myMessage'>
+                        {message.replace('my_message_hackyasf', '')}
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className='flex-message-wrapper'>
+                    <div className='message'>{message}</div>
+                </div>
+            );
+        }
     });
 
     useEffect(() => {
@@ -68,7 +77,6 @@ function Home({ location }) {
         <div className='Home'>
             <div className='messages-field'>
                 <div className='messages-wrapper'>{renderMessages}</div>
-                <div className='myMessages-wrapper'>{renderMyMessages}</div>
             </div>
 
             <div className='chat-field'>

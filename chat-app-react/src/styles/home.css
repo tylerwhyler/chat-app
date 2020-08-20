@@ -86,16 +86,23 @@ form > button:active {
     min-height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: flex-end;
 }
 
-.myMessages-wrapper {
-    min-height: inherit;
+.flex-message-wrapper {
+    width: calc(100vw - 30px);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-end;
+}
+
+.myflex-message-wrapper {
+    width: calc(100vw - 30px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 /* .messages-wrapper:nth-child(even) {
@@ -112,13 +119,14 @@ form > button:active {
     justify-content: flex-end;
 } */
 
-.message {
+.message,
+.myMessage {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-around;
     padding: 10px;
     background-color: skyblue;
-    width: inherit;
+    width: fit-content;
     max-width: 60vw;
     border-radius: 8px;
     font-size: 1.7em;
