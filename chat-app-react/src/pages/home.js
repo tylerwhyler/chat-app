@@ -13,7 +13,8 @@ function Home({ location }) {
     let [messages, setMessages] = useState([]);
 
     const pageBottom = useRef(null);
-    const ENDPOINT = 'localhost:4000';
+    const ENDPOINT = 'https://tyji-chat-app-api.herokuapp.com/';
+    // const ENDPOINT = 'localhost:4000';
 
     const scrollToBottom = () => {
         pageBottom.current.scrollIntoView({ behavior: 'smooth' });

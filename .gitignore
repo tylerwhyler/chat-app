@@ -1,2 +1,4 @@
 /chat-app-react/node_modules
 /chat-app-api/node_modules
+/chat-app-db/node_modules
+/chat-app-db/.git
