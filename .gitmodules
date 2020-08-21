@@ -1,0 +1,3 @@
+[submodule "chat-app-db"]
+	path = chat-app-db
+	url = ./
